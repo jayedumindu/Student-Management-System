@@ -7,12 +7,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class mainViewController {
+
     public TableView studentTbl;
     public TableColumn sIdClm;
     public TableColumn sNameClm;
     public TableColumn sMailClm;
     public TableColumn sContactClm;
     public TableColumn sAddressClm;
+
     public JFXTextField sNameTxt;
     public JFXTextField sMailTxt;
     public JFXTextField sContactTxt;
