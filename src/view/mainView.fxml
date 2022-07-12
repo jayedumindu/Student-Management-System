@@ -24,12 +24,13 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <JFXTextField fx:id="sNameTxt" alignment="CENTER" layoutX="408.0" layoutY="131.0" prefHeight="25.0" prefWidth="246.0" promptText="Student Name" />
+      <JFXTextField fx:id="sNameTxt" alignment="CENTER" layoutX="262.0" layoutY="131.0" prefHeight="25.0" prefWidth="246.0" promptText="Student Name" />
       <JFXTextField fx:id="sMailTxt" alignment="CENTER" layoutX="94.0" layoutY="224.0" prefHeight="25.0" prefWidth="212.0" promptText="e-mail" />
       <JFXTextField fx:id="sContactTxt" alignment="CENTER" layoutX="408.0" layoutY="224.0" prefHeight="25.0" prefWidth="246.0" promptText="contact" />
       <JFXTextField fx:id="sAddressTxt" alignment="CENTER" layoutX="186.0" layoutY="309.0" prefHeight="25.0" prefWidth="388.0" promptText="address" />
       <JFXButton fx:id="saveBtn" layoutX="342.0" layoutY="382.0" onAction="#saveOrUpdateStudent" text="Save Student" />
       <JFXButton layoutX="352.0" layoutY="664.0" onAction="#removeStudent" text="remove" />
-      <JFXTextField fx:id="sidTxt" alignment="CENTER" layoutX="94.0" layoutY="131.0" onAction="#searchStudent" prefHeight="25.0" prefWidth="185.0" promptText="Student ID" />
+      <JFXTextField fx:id="sidTxt" alignment="CENTER" layoutX="94.0" layoutY="131.0" onAction="#searchStudent" prefHeight="25.0" prefWidth="109.0" promptText="Student ID" />
+      <JFXTextField fx:id="nicTxt" alignment="CENTER" layoutX="553.0" layoutY="131.0" prefHeight="25.0" prefWidth="137.0" promptText="nic" />
    </children>
 </AnchorPane>

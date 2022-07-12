@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 public class StudentTDM {
     private String SId;
+    private String NIC;
     private String SName;
     private String eMail;
     private String contact;
