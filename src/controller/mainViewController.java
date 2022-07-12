@@ -34,20 +34,48 @@ public class mainViewController {
 
     ObservableList<StudentTDM> studentTDMS = FXCollections.observableArrayList();
 
-    public void initialize(){
+    public void initialize() throws SQLException, ClassNotFoundException {
         studentTbl.setItems(studentTDMS);
+        loadAllStudents();
     }
 
     public void saveOrUpdateStudent(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         // checking if student exist or not
-        Student st = new Student(sidTxt.getText(),nicTxt.getText(),sNameTxt.getText(),sContactTxt.getText(),sAddressTxt.getText(),sMailTxt.getText());
-        String statement = "INSERT INTO TABLE Student(?,?,?,?,?,?)";
-        if(CrudUtil.execute(statement,st.getSId(),st.getNIC(),st.getSName(),st.getContact(),st.getAddress(),st.getEMail())){
-            new Alert(Alert.AlertType.INFORMATION,"Student Saved!").show();
+        ResultSet result = CrudUtil.execute("SELECT * FROM student WHERE student_id=? ", sidTxt.getText());
+        if(result.next()){
+            // update
+            StudentTDM student = new StudentTDM(
+                    nicTxt.getText(),
+                    sNameTxt.getText(),
+                    sMailTxt.getText(),
+                    sContactTxt.getText(),
+                    sAddressTxt.getText(),
+                    nicTxt.getText()
+            );
+            boolean isStUpdated = CrudUtil.execute("UPDATE student SET student_name=?, email=?, contact=?, address=?, NIC=? WHERE student_id=?",
+                    student.getSId(),
+                    student.getSName(),
+                    student.getEMail(),
+                    student.getContact(),
+                    student.getAddress(),
+                    student.getNIC());
+            if (isStUpdated) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Updated!").show();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+            }
         }else {
-            new Alert(Alert.AlertType.ERROR,"Interrupted!").show();
+            // add new student
+            Student st = new Student(sidTxt.getText(), sNameTxt.getText(), sContactTxt.getText(), sAddressTxt.getText(), sMailTxt.getText(), nicTxt.getText());
+            String statement = "INSERT INTO TABLE Student(?,?,?,?,?,?)";
+            if (CrudUtil.execute(statement, st.getSId(), st.getNIC(), st.getSName(), st.getContact(), st.getAddress(), st.getEMail())) {
+                new Alert(Alert.AlertType.INFORMATION, "Student Saved!").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Interrupted!").show();
+            }
         }
         loadAllStudents();
+        clearUI();
     }
 
     public void removeStudent(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
@@ -75,8 +103,8 @@ public class mainViewController {
             } else {
                 new Alert(Alert.AlertType.WARNING, "Empty set").show();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
