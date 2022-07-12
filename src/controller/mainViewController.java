@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import model.Student;
 import tdm.StudentTDM;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class mainViewController {
@@ -38,6 +39,7 @@ public class mainViewController {
     }
 
     public void saveOrUpdateStudent(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        // checking if student exist or not
         Student st = new Student(sidTxt.getText(),nicTxt.getText(),sNameTxt.getText(),sContactTxt.getText(),sAddressTxt.getText(),sMailTxt.getText());
         String statement = "INSERT INTO TABLE Student(?,?,?,?,?,?)";
         if(CrudUtil.execute(statement,st.getSId(),st.getNIC(),st.getSName(),st.getContact(),st.getAddress(),st.getEMail())){
@@ -45,17 +47,66 @@ public class mainViewController {
         }else {
             new Alert(Alert.AlertType.ERROR,"Interrupted!").show();
         }
+        loadAllStudents();
     }
 
-    public void removeStudent(ActionEvent actionEvent) {
-
+    public void removeStudent(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        StudentTDM selectedTDM = studentTbl.getSelectionModel().getSelectedItem();
+        String statement = "DELETE FROM Student WHERE student_id=?";
+        if(CrudUtil.execute(statement,selectedTDM.getSId())){
+            new Alert(Alert.AlertType.INFORMATION,"Student Deleted!").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Interrupted!").show();
+        }
+        loadAllStudents();
     }
 
     public void searchStudent(ActionEvent actionEvent) {
+        try {
+            ResultSet result = CrudUtil.execute("SELECT * FROM student WHERE student_id=? ", sidTxt.getText());
+            if (result.next()) {
+                sNameTxt.setText(result.getString(2));
+                sMailTxt.setText(result.getString(3));
+                sContactTxt.setText(result.getString(4));
+                sAddressTxt.setText(result.getString(5));
+                nicTxt.setText(result.getString(6));
+
+
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Empty set").show();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void loadAllStudents(){
+    private void loadAllStudents() throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM student");
+        studentTDMS.clear();
+        while (resultSet.next()) {
+            studentTDMS.add(
+                    new StudentTDM(
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6)
+                    )
+            );
+        }
+        studentTbl.refresh();
+    }
 
+    void clearUI() {
+        sAddressTxt.clear();
+        sContactTxt.clear();
+        sMailTxt.clear();
+        sidTxt.clear();
+        sNameTxt.clear();
+        nicTxt.clear();
     }
 
 }
