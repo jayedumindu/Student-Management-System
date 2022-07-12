@@ -10,13 +10,14 @@
 
 <AnchorPane prefHeight="739.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainViewController">
    <children>
-      <TableView fx:id="studentTbl" layoutX="63.0" layoutY="442.0" prefHeight="200.0" prefWidth="645.0">
+      <TableView fx:id="studentTbl" layoutX="30.0" layoutY="442.0" prefHeight="200.0" prefWidth="711.0">
         <columns>
           <TableColumn fx:id="sIdClm" prefWidth="89.0" text="Student_ID" />
-          <TableColumn fx:id="sNameClm" prefWidth="135.0" text="Student Name" />
-            <TableColumn fx:id="sMailClm" prefWidth="122.0" text="e-mail" />
-            <TableColumn fx:id="sContactClm" prefWidth="122.0" text="contact" />
-            <TableColumn fx:id="sAddressClm" prefWidth="176.0" text="address" />
+          <TableColumn fx:id="sNameClm" prefWidth="143.0" text="Student Name" />
+            <TableColumn fx:id="sMailClm" prefWidth="107.0" text="e-mail" />
+            <TableColumn fx:id="sContactClm" prefWidth="117.0" text="contact" />
+            <TableColumn fx:id="sAddressClm" prefWidth="149.0" text="address" />
+            <TableColumn fx:id="nicClm" prefWidth="105.0" text="NIC" />
         </columns>
       </TableView>
       <Text layoutX="268.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Management System">

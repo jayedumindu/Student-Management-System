@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.Student;
 import tdm.StudentTDM;
 
@@ -23,6 +24,7 @@ public class mainViewController {
     public TableColumn<StudentTDM,String> sMailClm;
     public TableColumn<StudentTDM,String> sContactClm;
     public TableColumn<StudentTDM,String> sAddressClm;
+    public TableColumn<StudentTDM,String> nicClm;
 
     public JFXTextField sNameTxt;
     public JFXTextField sMailTxt;
@@ -32,9 +34,19 @@ public class mainViewController {
     public JFXTextField sidTxt;
     public JFXTextField nicTxt;
 
+
     ObservableList<StudentTDM> studentTDMS = FXCollections.observableArrayList();
 
     public void initialize() throws SQLException, ClassNotFoundException {
+
+        // initializing table
+        sIdClm.setCellValueFactory(new PropertyValueFactory<>("SId"));
+        sMailClm.setCellValueFactory(new PropertyValueFactory<>("eMail"));
+        sNameClm.setCellValueFactory(new PropertyValueFactory<>("SName"));
+        sAddressClm.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        sContactClm.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        nicClm.setCellValueFactory(new PropertyValueFactory<>("NIC"));
+
         studentTbl.setItems(studentTDMS);
         loadAllStudents();
     }
