@@ -96,5 +96,16 @@ create table payment
             on update cascade on delete cascade
 );
 
+INSERT INTO student VALUES('S001','Dumi','imashavithanage@gmail.com','0771345452','Galle','994545678v');
 
+INSERT INTO teacher VALUES('T001','Manel','0778989234','Matara');
 
+INSERT INTO subject VALUES('S001','Maths',89.5,'T001');
+
+INSERT INTO intake VALUES('I001','2022/08/02','final','first batch','C001');
+
+INSERT INTO course VALUES('C001','GDSE',350000.00,'12m','S001');
+
+INSERT INTO registration VALUES('R001','2022/08/02','S001','I001');
+
+INSERT INTO payment VALUES('P001','2022/08/02',50000.00,'R001');
