@@ -12,7 +12,7 @@ public class DBConnection {
     //2 rule
     private DBConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Expo_Rail", "root", "mpsys");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ijse", "root", "mpsys");
     }
 
     // 3 rule

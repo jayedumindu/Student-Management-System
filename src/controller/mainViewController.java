@@ -57,7 +57,7 @@ public class mainViewController {
         if(result.next()){
             // update
             StudentTDM student = new StudentTDM(
-                    nicTxt.getText(),
+                    sidTxt.getText(),
                     sNameTxt.getText(),
                     sMailTxt.getText(),
                     sContactTxt.getText(),
@@ -65,12 +65,12 @@ public class mainViewController {
                     nicTxt.getText()
             );
             boolean isStUpdated = CrudUtil.execute("UPDATE student SET student_name=?, email=?, contact=?, address=?, NIC=? WHERE student_id=?",
-                    student.getSId(),
                     student.getSName(),
                     student.getEMail(),
                     student.getContact(),
                     student.getAddress(),
-                    student.getNIC());
+                    student.getNIC(),
+                    student.getSId());
             if (isStUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Updated!").show();
             } else {
@@ -78,9 +78,9 @@ public class mainViewController {
             }
         }else {
             // add new student
-            Student st = new Student(sidTxt.getText(), sNameTxt.getText(), sContactTxt.getText(), sAddressTxt.getText(), sMailTxt.getText(), nicTxt.getText());
-            String statement = "INSERT INTO TABLE Student(?,?,?,?,?,?)";
-            if (CrudUtil.execute(statement, st.getSId(), st.getNIC(), st.getSName(), st.getContact(), st.getAddress(), st.getEMail())) {
+            Student st = new Student(sidTxt.getText(), sNameTxt.getText(), sMailTxt.getText(), sContactTxt.getText(), sAddressTxt.getText(),  nicTxt.getText());
+            String statement = "INSERT INTO Student VALUES(?,?,?,?,?,?)";
+            if (CrudUtil.execute(statement, st.getSId(), st.getSName(), st.getEMail(), st.getContact(), st.getAddress(), st.getNIC())) {
                 new Alert(Alert.AlertType.INFORMATION, "Student Saved!").show();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Interrupted!").show();
@@ -110,8 +110,6 @@ public class mainViewController {
                 sContactTxt.setText(result.getString(4));
                 sAddressTxt.setText(result.getString(5));
                 nicTxt.setText(result.getString(6));
-
-
             } else {
                 new Alert(Alert.AlertType.WARNING, "Empty set").show();
             }
