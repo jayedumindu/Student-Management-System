@@ -1,1 +1,1 @@
-Database preview is added as a .txt file 
+Database preview is added as a .txt file (ijse-db.txt)
