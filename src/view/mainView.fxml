@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="739.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainViewController">
+   <children>
+      <TableView fx:id="studentTbl" layoutX="63.0" layoutY="442.0" prefHeight="200.0" prefWidth="645.0">
+        <columns>
+          <TableColumn fx:id="sIdClm" prefWidth="89.0" text="Student_ID" />
+          <TableColumn fx:id="sNameClm" prefWidth="135.0" text="Student Name" />
+            <TableColumn fx:id="sMailClm" prefWidth="122.0" text="e-mail" />
+            <TableColumn fx:id="sContactClm" prefWidth="122.0" text="contact" />
+            <TableColumn fx:id="sAddressClm" prefWidth="176.0" text="address" />
+        </columns>
+      </TableView>
+      <Text layoutX="268.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Management System">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="sNameTxt" alignment="CENTER" layoutX="408.0" layoutY="131.0" prefHeight="25.0" prefWidth="246.0" promptText="Student Name" />
+      <JFXTextField fx:id="sMailTxt" alignment="CENTER" layoutX="94.0" layoutY="224.0" prefHeight="25.0" prefWidth="212.0" promptText="e-mail" />
+      <JFXTextField fx:id="sContactTxt" alignment="CENTER" layoutX="408.0" layoutY="224.0" prefHeight="25.0" prefWidth="246.0" promptText="contact" />
+      <JFXTextField fx:id="sAddressTxt" alignment="CENTER" layoutX="186.0" layoutY="309.0" prefHeight="25.0" prefWidth="388.0" promptText="address" />
+      <JFXButton fx:id="saveBtn" layoutX="342.0" layoutY="382.0" onAction="#saveOrUpdateStudent" text="Save Student" />
+      <JFXButton layoutX="352.0" layoutY="664.0" onAction="#removeStudent" text="remove" />
+      <JFXTextField fx:id="sidTxt" alignment="CENTER" layoutX="94.0" layoutY="131.0" prefHeight="25.0" prefWidth="185.0" promptText="Student ID" />
+   </children>
+</AnchorPane>
