@@ -1,0 +1,100 @@
+create table student
+(
+    student_id   varchar(45) not null,
+    student_name varchar(45) null,
+    email        text        null,
+    contact      varchar(20) null,
+    address      text        null,
+    NIC          varchar(45) null,
+    constraint Student_student_id_uindex
+        unique (student_id)
+);
+
+alter table student
+    add primary key (student_id);
+----------------------------------------------------
+create table teacher
+(
+    teacher_id varchar(45) not null,
+    name       varchar(45) null,
+    nic        varchar(45) null,
+    contact    varchar(45) null,
+    address    text        null,
+    constraint Teacher_teacher_id_uindex
+        unique (teacher_id)
+);
+
+alter table teacher
+    add primary key (teacher_id);
+------------------------------------------------
+create table subject
+(
+    subject_id   varchar(45) not null,
+    subject_name varchar(45) null,
+    credit       double      null,
+    teacher      varchar(45) not null,
+    constraint subject_subject_id_uindex
+        unique (subject_id),
+    constraint subject_teacher_teacher_id_fk
+        foreign key (teacher) references teacher (teacher_id)
+            on update cascade on delete cascade
+);
+
+alter table subject
+    add primary key (subject_id);
+-------------------------------------------------
+create table course
+(
+    course_id   varchar(45) not null
+        primary key,
+    course_name varchar(45) null,
+    cost        double      null,
+    duration    varchar(45) null,
+    subject     varchar(45) not null,
+    constraint course_subject_subject_id_fk
+        foreign key (subject) references subject (subject_id)
+            on update cascade on delete cascade
+);
+--------------------------------------------------
+create table intake
+(
+    intake_id   varchar(45) not null
+        primary key,
+    start_date  date        null,
+    intake_col  varchar(45) null,
+    description varchar(45) null,
+    course      varchar(45) not null,
+    constraint intake_course_course_id_fk
+        foreign key (course) references course (course_id)
+            on update cascade on delete cascade
+);
+--------------------------------------------------
+create table registration
+(
+    registration_id varchar(45),
+    reg_date date null,
+    student varchar(45) null,
+    intake varchar(45),
+    constraint registration_intake_intake_id_fk
+        foreign key (intake) references intake (intake_id)
+            on update cascade on delete cascade,
+    constraint registration_student_student_id_fk
+        foreign key (student) references student (student_id)
+            on update cascade on delete cascade,
+    primary key (registration_id,intake)
+);
+-------------------------------------------------
+create table payment
+(
+    payment_id   varchar(45) not null
+        primary key,
+    date         date        null,
+    cost         double      null,
+    registration varchar(45) null,
+    constraint payment_registration_registration_id_fk
+        foreign key (registration) references registration (registration_id)
+            on update cascade on delete cascade
+);
+
+
+
